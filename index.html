@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FuzzBox - FFuf Command Generator</title>   
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+    <script src="https://kit.fontawesome.com/3c2bd4f4b6.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="Top-box">
+  <h1 class="Title-font">FuzzBox: <br> FFuf Command Generator</h1>
+</div>
+
+<div class="Main-box">
+  <div class="Main-tab">
+    <button class="Tablinks active" onclick="openTab(event, 'BasicMode')">Basic Mode</button>
+    <button class="Tablinks" onclick="openTab(event, 'HTTPMode')">HTTP Options</button>
+    <button class="Tablinks" onclick="openTab(event, 'MatchMode')">Matchers</button>
+    <button class="Tablinks" onclick="openTab(event, 'FilterMode')">Filters</button>
+    <button class="Tablinks" onclick="openTab(event, 'OutputMode')">Output</button>
+    <label class="switch">
+      <input type="checkbox" id="Lightswitch" onclick="SwitchMode()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <div class="Content-box-1">
+    <!-- Basic Mode -->
+    <div id="BasicMode" class="Tabcontent" style="display:block">
+      <h2>Basic Mode</h2>
+      <label class="Inputbox" title="Target URL with FUZZ keyword">
+        <input type="text" id="TargetURL" placeholder="https://example.com/FUZZ" onkeyup="update_basic_command()">
+        <span class="label">Target URL</span>
+      </label>
+      <label class="Inputbox" title="Path to wordlist file">
+        <input type="text" id="Wordlist" placeholder="/usr/share/wordlists/dirb/common.txt" onkeyup="update_basic_command()">
+        <span class="label">Wordlist Path</span>
+      </label>
+      <div class="Command-box"><p id="BasicCommand"></p></div>
+      <button class="CopyBtn1" onclick="copyCommand('BasicCommand')"><i class="fa-solid fa-copy"></i></button>
+    </div>
+
+    <!-- HTTP Options -->
+    <div id="HTTPMode" class="Tabcontent">
+      <h2>HTTP Options</h2>
+      <label class="Inputbox" title="Target URL">
+        <input type="text" id="HttpURL" placeholder="https://example.com/FUZZ" onkeyup="update_http_command()">
+        <span class="label">Target URL</span>
+      </label>
+      <select class="DropdownContent" id="HttpMethod" onchange="update_http_command()" title="HTTP method to use">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+      </select>
+      <label class="Inputbox" title="Header, e.g. Authorization: Bearer token">
+        <input type="text" id="HttpHeader" placeholder="Header" onkeyup="update_http_command()">
+        <span class="label">Header</span>
+      </label>
+      <label class="Inputbox" title="Cookies to use for request">
+        <input type="text" id="HttpCookie" placeholder="SESSIONID=12345" onkeyup="update_http_command()">
+        <span class="label">Cookies</span>
+      </label>
+      <label class="Inputbox" title="POST data content (JSON, form-data, etc.)">
+        <input type="text" id="HttpData" placeholder='{"key":"FUZZ"}' onkeyup="update_http_command()">
+        <span class="label">POST Data</span>
+      </label>
+      <div class="Command-box"><p id="HttpCommand"></p></div>
+      <button class="CopyBtn1" onclick="copyCommand('HttpCommand')"><i class="fa-solid fa-copy"></i></button>
+    </div>
+
+    <!-- Matcher Options -->
+    <div id="MatchMode" class="Tabcontent">
+      <h2>Matchers</h2>
+      <label class="Inputbox" title="Target URL">
+        <input type="text" id="MatchURL" placeholder="https://example.com/FUZZ" onkeyup="update_matcher_command()">
+        <span class="label">Target URL</span>
+      </label>
+      <label class="Inputbox" title="Wordlist path">
+        <input type="text" id="MatchWordlist" placeholder="/usr/share/wordlists/common.txt" onkeyup="update_matcher_command()">
+        <span class="label">Wordlist</span>
+      </label>
+      <label class="Inputbox" title="Match status code (e.g. 200, 403)">
+        <input type="text" id="MatchStatus" placeholder="200" onkeyup="update_matcher_command()">
+        <span class="label">Status Code</span>
+      </label>
+      <label class="Inputbox" title="Match response size in bytes">
+        <input type="text" id="MatchSize" placeholder="512" onkeyup="update_matcher_command()">
+        <span class="label">Response Size</span>
+      </label>
+      <label class="Inputbox" title="Match word count in response">
+        <input type="text" id="MatchWords" placeholder="32" onkeyup="update_matcher_command()">
+        <span class="label">Word Count</span>
+      </label>
+      <div class="Command-box"><p id="MatchCommand"></p></div>
+      <button class="CopyBtn1" onclick="copyCommand('MatchCommand')"><i class="fa-solid fa-copy"></i></button>
+    </div>
+
+    <!-- Filter Options -->
+    <div id="FilterMode" class="Tabcontent">
+      <h2>Filters</h2>
+      <label class="Inputbox" title="Target URL">
+        <input type="text" id="FilterURL" placeholder="https://example.com/FUZZ" onkeyup="update_filter_command()">
+        <span class="label">Target URL</span>
+      </label>
+      <label class="Inputbox" title="Wordlist path">
+        <input type="text" id="FilterWordlist" placeholder="/usr/share/wordlists/common.txt" onkeyup="update_filter_command()">
+        <span class="label">Wordlist</span>
+      </label>
+      <label class="Inputbox" title="Filter status code">
+        <input type="text" id="FilterCode" placeholder="404" onkeyup="update_filter_command()">
+        <span class="label">Filter Code</span>
+      </label>
+      <label class="Inputbox" title="Filter by response size">
+        <input type="text" id="FilterSize" placeholder="512" onkeyup="update_filter_command()">
+        <span class="label">Filter Size</span>
+      </label>
+      <label class="Inputbox" title="Filter by word count">
+        <input type="text" id="FilterWords" placeholder="15" onkeyup="update_filter_command()">
+        <span class="label">Word Count</span>
+      </label>
+      <div class="Command-box"><p id="FilterCommand"></p></div>
+      <button class="CopyBtn1" onclick="copyCommand('FilterCommand')"><i class="fa-solid fa-copy"></i></button>
+    </div>
+
+    <!-- Output Mode -->
+    <div id="OutputMode" class="Tabcontent">
+      <h2>Output Options</h2>
+      <label class="Inputbox" title="Target URL">
+        <input type="text" id="OutputURL" placeholder="https://example.com/FUZZ" onkeyup="update_output_command()">
+        <span class="label">Target URL</span>
+      </label>
+      <label class="Inputbox" title="Wordlist path">
+        <input type="text" id="OutputWordlist" placeholder="/usr/share/wordlists/rockyou.txt" onkeyup="update_output_command()">
+        <span class="label">Wordlist</span>
+      </label>
+      <select class="DropdownContent" id="OutputFormat" onchange="update_output_command()" title="Choose output format">
+        <option value="json">JSON</option>
+        <option value="html">HTML</option>
+        <option value="csv">CSV</option>
+        <option value="all">All</option>
+      </select>
+      <div class="Command-box"><p id="OutputCommand"></p></div>
+      <button class="CopyBtn1" onclick="copyCommand('OutputCommand')"><i class="fa-solid fa-copy"></i></button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

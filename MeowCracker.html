@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<HTML>
+    <head>
+        <title>MeowCracker - Online HashCat Command Generator</title>   
+        <!--External JS, CSS, and JSON-->
+        <link rel="stylesheet" href="main.css">
+        <script src="main.js"></script>
+        <script type="text/javascript" src="Hashes.json"></script>
+        <script src="https://kit.fontawesome.com/3c2bd4f4b6.js" crossorigin="anonymous"></script>
+
+        <!--Font Family-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Rubik+Puddles&display=swap" rel="stylesheet">
+
+        <!--Favicon-->
+        <link rel="shortcut icon" href="https://www.shareicon.net/data/64x64/2015/09/12/99741_cat_512x512.png"/>
+    </head>
+    
+    <body>
+        <div class = "Top-box"> 
+            <h1 class = "Title-font">MeowCracker: <br> HashCat Command Generator</h1>
+        </div>
+
+        <div class = "Main-box">
+            
+            <!-- Tab links -->
+            <div class="Main-tab">
+                <button class="Tablinks active" onclick="openTab(event, 'Tutorial')">Tutorial</button>
+                <button class="Tablinks" onclick="openTab(event, 'Hashes');HashesTable()">Hashes</button>
+                <button class="Tablinks" onclick="openTab(event, 'Command-Generator');HashesDropdown()">Basic Command Mode</button>
+                <button class="Tablinks" onclick="openTab(event, 'Command-Generator-2');HashesDropdown()">Advanced Command Mode</button>
+                
+                <!-- Lightmode switch -->
+                <label class="switch">
+                    <input type="checkbox" id ="Lightswitch" onclick="SwitchMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            
+            <!-- Tab contents: Start of Straight Attack Content -->
+            <div class = Content-box-1>
+                
+                <!--Command Generator Tab-->
+                <div id="Command-Generator" class="Tabcontent">
+
+                    <!--The Command Generator for Straight Attack Mode of HashCat-->
+                    <h1>
+                        <u>HashCat: Straight Attack (Option 0)</u>
+                    </h1>
+
+                    <h3>
+                        The HashCat Straight Attack mode is the most direct way to use HashCat. 
+                        It will run a Dictionary Attack on the targeted hash file provided to find a match on the hash. 
+                        It only requires 3 things:
+                    </h3>
+                    
+                    
+                    <h2>
+                        1. Please Choose the Type of Hash to Crack: 
+                    </h2>
+
+                    <!--Dropdown list of Hashes to let user select from-->
+                    <select class ="DropdownContent" name="HashType" id="HashTypeDropdown" onclick="javascript:update_command()">
+                        <!--<option class = "Hash-items" class = "custom-selection" value = "0">0 - MD5</option>-->            
+                    </select>
+                    <br>
+                    <br>
+                    
+                    
+
+                    <h2>
+                        2. Please Provide the Hash File Name: 
+                    </h2>
+
+                    <!--Input box for Name of Hash File-->
+                    <label for="Inputbox" class="Inputbox">
+                        <input type="text" id="HashFile" placeholder="&nbsp;" onkeyup="javascript:update_command()">
+                        <span class="label">Hash.txt</span>
+                    </label>
+                    <br>
+                    <br>
+
+                    <h2>
+                        3. Please Provide the Wordlists Name: 
+                    </h2>
+
+                    <!--Input box for Wordlist-->
+                    <label for="Inputbox" class="Inputbox">
+                        <input type="text" id="Wordlist" placeholder="&nbsp;" onkeyup="javascript:update_command()">
+                        <span class="label">Wordlist.txt</span>
+                    </label>
+
+                    <h2>
+                        Command Generation:
+                    </h2>
+
+                    <!--Generate command for straight attack mode-->
+                    <div class = "Command-box">
+                        <center>
+                            <p id = "Straight-Attack">
+                                hashcat -a 0 -m *hash value* *Hash file* *Wordlist.txt* --show
+                            </p>
+                        </center>
+                    </div>
+
+                    <div class = "CopyBox1">
+                        <button class = "CopyBtn1" onclick="copy_Command()"><i class="fa-solid fa-copy"></i></button>
+                    </div>
+
+                    <!--Start of Combination Attack Content-->
+                    <div class = Content-box-2>
+                        <h1>
+                            <u>HashCat: Combination Attack (Option 1)</u>
+                        </h1>
+    
+                        <h3>
+                            In the Combination Attack mode of HashCat, it allows HashCat to run two dictionaries at once.
+                            It is knowned to be “combined” as each word of a dictionary will be bined into a single word 
+                            for each word in another dictionary.
+                            Here are the required details:
+                        </h3>
+                        
+                        
+                        <h2>
+                            1. Please Choose the Type of Hash to Crack: 
+                        </h2>
+    
+                        <!--Dropdown list of Hashes to let user select from-->
+                        <select class ="DropdownContent" name="HashType" id="HashTypeDropdown2" onclick="javascript:update_command2()">
+                            <!--<option class = "Hash-items" class = "custom-selection" value = "0">0 - MD5</option> -->               
+                        </select>
+                        <br>
+                        <br>         
+                        
+    
+                        <h2>
+                            2. Please Provide the Hash File Name: 
+                        </h2>
+    
+                        <!--Input box for Name of Hash File-->
+                        <label for="Inputbox" class="Inputbox">
+                            <input type="text" id="HashFile2" placeholder="&nbsp;" onkeyup="javascript:update_command2()">
+                            <span class="label">Hash.txt</span>
+                        </label>
+
+                        <h2>
+                            3. Please Provide the first Wordlists Name: 
+                        </h2>
+    
+                        <!--Input box for Wordlist-->
+                        <label for="Inputbox" class="Inputbox">
+                            <input type="text" id="CAWordlist1" placeholder="&nbsp;" onkeyup="javascript:update_command2()">
+                            <span class="label">Wordlist.txt</span>
+                        </label>
+
+                        <h2>
+                            4. Please Provide the second Wordlists Name: 
+                        </h2>
+    
+                        <!--Input box for Wordlist-->
+                        <label for="Inputbox" class="Inputbox">
+                            <input type="text" id="CAWordlist2" placeholder="&nbsp;" onkeyup="javascript:update_command2()">
+                            <span class="label">Wordlist.txt</span>
+                        </label>
+
+                        <h2>
+                            Command Generation:
+                        </h2>
+
+                        <div class = "Command-box">
+                            <center>
+                                <p id = "Combination-Attack">
+                                    hashcat -m 0 -a 1 *HashFile* *Wordlist1.txt* *Wordlist2.txt* --show
+                                </p>
+                            </center>
+                        </div>
+
+                        <div class = "CopyBox1">
+                            <button class = "CopyBtn1" onclick="copy_Command2()"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+
+                    </div>
+
+                    <!--Start of Brute Force Attack Content-->
+                    <div class = Content-box-3>
+                        <h1>
+                            <u>HashCat: Brute Force Attack (Option 3)</u>
+                        </h1>
+    
+                        <h3>
+                            The HashCat Brute Force Attack mode is an attack in which HashCat will go through all the possible combination to crack the hash. 
+                            By running attack mode 3 HashCat will try to crack the hash provided in a text file. 
+                            <br>
+                            Here are the required details:
+                        </h3>
+                        
+                        
+                        <h2>
+                            1. Please Choose the Type of Hash to Crack: 
+                        </h2>
+    
+                        <!--Dropdown list of Hashes to let user select from-->
+                        <select class ="DropdownContent" name="HashType" id="HashTypeDropdown3" onclick="javascript:update_command3()">
+                            <!--<option class = "Hash-items" class = "custom-selection" value = "0">0 - MD5</option> -->               
+                        </select>
+                        <br>
+                        <br>                        
+                        
+    
+                        <h2>
+                            2. Please Provide the Hash File Name: 
+                        </h2>
+    
+                        <!--Input box for Name of Hash File-->
+                        <label for="Inputbox" class="Inputbox">
+                            <input type="text" id="HashFile3" placeholder="&nbsp;" onkeyup="javascript:update_command3()">
+                            <span class="label">Hash.txt</span>
+                        </label>
+
+                        <h2>
+                            Command Generation:
+                        </h2>
+
+                        <div class = "Command-box">
+                            <center>
+                                <p id = "BruteForce-Attack">
+                                    hashcat -a 3 -m *hash value* *Hash file* --show
+                                </p>
+                            </center>
+                        </div>
+
+                        <div class = "CopyBox1">
+                            <button class = "CopyBtn1" onclick="copy_Command3()"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+
+                    </div>
+
+
+
+                    <!--Clarification Text-->
+                    <a class = "bottom-text">
+                        *MeowCracker does not provide user the directory to their own wordlist, for default directory, input /usr/share/wordlists/wordlist.txt
+                    </a>
+                    <br>
+                    <a class = "bottom-text">
+                        *If you had relocated the wordlists in a different path, remember to input the directory when you pasted the command.
+                    </a>
+
+                </div>
+
+                <!--Advanced Command Tab-->
+                <div id="Command-Generator-2" class="Tabcontent">
+                    <h1>
+                        <u>HashCat: Hybrid Attacks</u>
+                    </h1>
+
+                    <h3>
+                        Basically, the hybrid attack is just a Combinator attack. 
+                        One side is simply a dictionary, the other is the result of a Brute-Force attack. In other words, the full Brute-Force keyspace is either appended or prepended to each of the words from the dictionary. 
+                        Hence, the name “hybrid”.
+                        Alternatively, Mask attack or Rule-based attack can replace the Brute-Force side.
+                    </h3>
+
+                    <h2>
+                        Attack Mode: 
+                    </h2>
+
+                    <!--Radio Button for Attack Mode-->
+                    <input type ="radio" id ="AM6" name ="Attack-Mode" value = "6" onclick="javascript:update_command4()" checked="checked">
+                    <label for="AM6">6 - Hybrid Wordlist + Mask</label>
+                    <input type ="radio" id ="AM7" name ="Attack-Mode" value = "7" onclick="javascript:update_command4()">
+                    <label for="AM7">7 - Hybrid Mask + Wordlist</label>
+
+                    <!--Radio Button for Output Result Settings-->
+                    <div class = "Output-Settings">
+                        <h2>
+                            Output Display Settings: 
+                        </h2>
+
+                        <input type ="radio" id ="ShowOutput" name ="Output-Settings" value = "--show" onclick="javascript:update_command4()" checked="checked">
+                        <label for="ShowOutput">Show Output</label>
+                        <input type ="radio" id ="OutputFile" name ="Output-Settings" value = "-o Hybrid-Attack.txt" onclick="javascript:update_command4()">
+                        <label for="OutputFile">Save Output</label>
+                    </div>
+
+                    <!--Radio Button for Charset Definition On or Off-->
+                    <div class = "PredifinedCharset">
+                        <h2>
+                            Charset Settings: 
+                        </h2>
+
+                        <input type ="radio" id ="CharsetOff" name ="Charset-Settings" value = "0" onclick="javascript:setDisable()" checked="checked">
+                        <label for="CharsetOff">Charset Off</label>
+                        <input type ="radio" id ="CharsetOn" name ="Charset-Settings" value = "1" onclick="javascript:setDisable()">
+                        <label for="CharsetOn">Charset On</label>
+                    </div>
+                    
+                    <h2>
+                        Targeted Hash Type: 
+                    </h2>
+
+                    <!--Dropdown list of Hashes to let user select from-->
+                    <select class ="DropdownContent" name="HashType" id="HashTypeDropdown4" onclick="javascript:update_command4()">          
+                    </select>
+                    <br>
+                    <br>
+                    
+                    <div class = "CharsetInput">
+                        <h2>
+                            Predefined Charset: 
+                        </h2>
+
+                        <!--Input box for Name of Hash File-->
+                        <label for="Inputbox2" class="Inputbox2">
+                            <input type="text" id="CharsetValue" placeholder="&nbsp;" onkeyup="javascript:update_command4()" disabled>
+                            <span class="label">eg: ?l?l?l?l?d?d?d?d</span>
+                        </label>
+                    </div>
+                    
+
+                    <h2>
+                        Hash File Name: 
+                    </h2>
+
+                    <!--Input box for Name of Hash File-->
+                    <label for="Inputbox" class="Inputbox">
+                        <input type="text" id="HashFile4" placeholder="&nbsp;" onkeyup="javascript:update_command4()">
+                        <span class="label">Hash.txt</span>
+                    </label>
+
+                    <div class = ReferenceSource>
+                        <h2>
+                            For the Predefine Charset, You May Refer Here:
+                        </h2>
+
+                        <div class = ReferenceBox>
+                            <a href="https://github.com/frizb/Hashcat-Cheatsheet">HashCat CheatSheet</a>
+                        </div>
+                    </div>
+
+                    <h2>
+                        Command Generation:
+                    </h2>
+
+                    <div class = "Command-box">
+                        <center>
+                            <p id = "Hybrid-Attack">
+                                hashcat -a 6 -m 0 --show
+                            </p>
+                        </center>
+                    </div>
+
+                    <div class = "CopyBox1">
+                        <button class = "CopyBtn1" onclick="copy_Command4()"><i class="fa-solid fa-copy"></i></button>
+                    </div>
+                </div>
+                
+                <!--Hashes Tab-->
+                <div id="Hashes" class="Tabcontent">
+                    <div class = Hashbox>
+                    <h1>
+                        <u>This is the entire list of Hashes that is supported by HashCat:</u>
+                    </h1>
+
+                        <div class = "HashTable">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th id = "HashNum">No</th>
+                                    <th id = "HashValue">Hash Value</th>
+                                    <th id = "HashName">Hash Name</th>
+                                </tr>
+                            </thead>
+                                <tbody id = "data-output">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+                
+                <!--Tutorial Tab-->
+                <div id="Tutorial" class="Tabcontent active">
+                    <h1>
+                        <u>What Is MeowCracker?</u>
+                    </h1>
+
+                    <h2>
+                        MeowCracker is a HashCat command generator that was created by w0rmhol3. 
+                        Its main existence is to ease the usage of Hashcat password cracking tool by generating the required commands to run password cracking functionalities through an online website that can allow users to choose the password cracking mode and generate the required commands that initiates the cracking process.
+                    </h2>
+                    <br>
+                    <br>
+
+
+                    <h1>
+                        <u>Who Is It For?</u>
+                    </h1>
+
+                    <h2>
+                        This tool is mainly created for cybersecurity practitioners. With that said, the main target user of the tool is to be cybersecurity professionals, and students. 
+                        The tool will be able to assist these users in cracking passwords and learning the tool through the commands generated through the website. Publishing this tool as a web-based tool enables it to be access by the general public, making it a free-to-use and accessible by everyone.
+                    </h2>
+                    <br>
+                    <br>
+
+
+                    <h1>
+                        <u>How To Utilize The Command Generator?</u>
+                    </h1>
+
+                    <h2>
+                        Based on the requirements of the hash to be cracked, users can go through the tool and follow the required criteria to fill in and the tool will automatically generate the full command to allow HashCat to run.
+                        Then, just click on the copy button to copy the code directly, and paste it in the linux terminal to run the password cracking process through HashCat.
+                    </h2>
+                    <br>
+                    <br>
+
+                    
+                </div>
+            </div>
+        </div>        
+        
+    </body>
+</HTML>

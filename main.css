@@ -1,0 +1,471 @@
+:root,
+:root.dark{
+    --body-bg:black;
+    --font-color: #C3C1C1; 
+    --box-bg: #2B2A2A;
+    --box-border: 5px solid white;
+    --tab-color: #545151;
+    --tab-hover-active-color: #A7A076;
+    --copy-hover-color: #A7A076;
+    --copy-active-color: #7b7a76;
+    --copy-box: 1px solid white;
+    --copy-btn-bg: white;
+    --icon-color: #454029;
+    --table-border: 1px solid white;
+    --disabled-input-bg: #525252;
+}
+
+:root.light{
+    --body-bg:#ffffff;
+    --font-color: black; 
+    --box-bg: #efeded;
+    --box-border: 5px solid #545151;
+    --tab-color: #545151;
+    --tab-hover-active-color: #A7A076;
+    --copy-hover-color: #525252;
+    --copy-active-color: #363636;
+    --copy-box: 1px solid #5e5a31;
+    --copy-btn-bg: #000000;
+    --icon-color: #ffffff;
+    --table-border: 1px solid #545151;
+    --disabled-input-bg: #a8a8a8;
+}
+
+body {
+    background-color: var(--body-bg);
+    color: var(--font-color);
+}
+
+.Top-box{
+    background-color: var(--box-bg);
+    width: 1400px;
+    border: var(--box-border);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    margin-left: 30px;
+}
+
+.Title-font{
+    font-family: 'Rubik Puddles', cursive;
+    text-align: center;
+}
+
+.Main-box{
+    background-color: var(--box-bg);
+    width: 1400px;
+    height: 800px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    margin-left: 35px;
+}
+
+.Main-tab{
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: -10px;
+    margin-top: -11px;
+    width: 1420px;
+    background-color: var(--tab-color);
+}
+
+.Main-tab button{
+    font-family: 'Bree Serif', serif;
+    font-size: 20px;
+}
+
+.Main-tab button:hover{
+    background-color: var(--tab-hover-active-color);
+}
+
+.Main-tab button.active{
+    background-color: var(--tab-hover-active-color);
+}
+
+.Tablinks{
+    background-color: var(--tab-color);
+    float: left;
+    border: none;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color:var(--font-color);
+  }
+
+.Tablinks :active{
+    background-color: var(--tab-hover-active-color);
+    float: left;
+    border: none;
+    border-top-left-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: var(--font-color);
+  }
+
+/*Dark and Light mode switch */
+/* The switch - the box around the slider */
+.switch{
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin-top: 12px;
+    margin-left: 627px;
+ }
+  
+/* Hide default HTML checkbox */
+.switch input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+/* The slider */
+.slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before{
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider{
+    background-color: #f3d421;
+    box-shadow: 0 0 25px #f3d421;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 25px #f3d421;
+}
+
+input:checked + .slider:before{
+    -webkit-transform: translateX(29px);
+    -ms-transform: translateX(29px);
+    transform: translateX(29px);
+}
+  
+/* Make switch and slider round */
+  .slider.round{
+    border-radius: 30px;
+}
+  
+.slider.round:before{
+    border-radius: 50%;
+}
+
+
+
+.Content-box-1{
+    font-family: 'Bree Serif', serif;
+    margin-top: -10px;
+    margin-left: 10px;
+    height: 700px;
+    width: 1400px;
+  }
+
+.Tabcontent{
+    display: none;
+}
+
+.Tabcontent.active{
+    display: block;
+}
+
+.focus-bg{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: grey;
+z-index: -1;
+transform: scaleX(0);
+transform-origin: left;
+}
+
+.Inputbox{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    min-width: 725px;
+    max-width: 280px;
+    border-radius: 3px;
+    overflow: hidden; 
+}
+
+.Inputbox .label{
+      position: absolute;
+      top: -15px;
+      left: 12px;
+      font-size: 26px;
+      font-weight: 500;
+      transform-origin: 0 0;
+      transform: translate3d(0, 0, 0);
+      transition: all .2s ease;
+      pointer-events: none; 
+}
+
+.Inputbox input{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 670px;
+    border: 10px;
+    font-family: inherit;
+    padding: 16px 12px 0 12px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    transition: all .15s ease; 
+    font-size: 23px;
+}
+
+.Inputbox input:not(:placeholder-shown) + .label{
+    transform: translate3d(0, -12px, 0) scale(0.75); 
+}
+
+.Inputbox input:focus{
+    outline: none;
+    box-shadow: inset 0 -2px 0 yellow; 
+}
+
+.Inputbox input:focus + .label{
+    color: primary;
+    transform: translate3d(0, -12px, 0) scale(0.75); 
+}
+
+.DropdownContent{
+    min-width: 525px;
+    min-height: 40px;
+    font-family: inherit;
+    font-size: 16px;
+    color: grey;
+    padding: 16px;
+    border-radius: 20px;
+}
+
+.DropdownContent:focus{
+    outline: none;
+    box-shadow: inset 0 -2px 0 yellow; 
+}
+#HashFile, #HashFile2, #HashFile3, #HashFile4, #Wordlist, #CAWordlist1, #CAWordlist2, #CharsetValue{
+border-radius: 20px;
+}
+
+.Command-box{
+    border: var(--copy-box);
+    border-radius: 20px;
+    width: 1350px;
+    height: 90px;
+}
+
+#Straight-Attack, #Combination-Attack, #BruteForce-Attack, #Hybrid-Attack{
+    font-size: 25px;
+}
+
+.fa-solid{
+    color: var(--icon-color);
+    font-size: 25px;
+}
+
+.CopyBtn1{
+    position: absolute;
+    background-color: var(--copy-btn-bg);
+    border: var(--copy-box);
+    border-top-right-radius : 20px;
+    border-bottom-right-radius: 20px;
+    height:91px;
+    width: 90px;
+    margin-left: 1261px;
+    margin-top: -91px;
+}
+
+.CopyBtn1:hover{
+    background-color: var(--copy-hover-color);
+    transition: .25s ease-in-out; 
+    cursor: pointer;
+}
+
+.CopyBtn1:active{
+    background-color: var(--copy-active-color);
+    cursor: pointer;
+}
+
+.Content-box-2{
+    background-color: var(--box-bg);
+    width: 1400px;
+    height: 890px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 70px;
+    margin-left: -20px;
+}
+
+.bottom-text{
+    margin-left: -50px;
+}
+
+.Hashbox{
+    margin-top: 10px;
+    margin-left: 0px;
+    width: 1400px;
+    height: 750px;
+    overflow-y: auto;
+}
+
+.Hashbox::-webkit-scrollbar{
+    width: 10px;
+}
+
+.Hashbox::-webkit-scrollbar-track{
+    background: #6e6b6b;
+    border-radius: 20px;
+}
+
+.Hashbox::-webkit-scrollbar-thumb{
+    background: #332f2f;
+    border-radius: 20px;
+}
+
+.HashTable table,th,td{
+    border: var(--table-border);
+    width: 1000px;
+    display: absolute;
+    margin-left: 180px;
+}
+
+#HashNum{
+    width: 150px;
+}
+
+#HashValue{
+    width: 600px;
+}
+
+.Content-box-3{
+    background-color: var(--box-bg);
+    width: 1400px;
+    height: 630px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: -20px;
+}
+
+.Output-Settings{
+    position: absolute;
+    margin-left: 500px;
+    margin-top: -94px;
+}
+
+.PredifinedCharset{
+    position: absolute;
+    margin-left: 900px;
+    margin-top: -94px;
+}
+
+.CharsetInput{
+    position: absolute;
+    margin-left: 740px;
+    margin-top: -150px;
+}
+
+.Inputbox2{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    min-width: 725px;
+    max-width: 280px;
+    border-radius: 3px;
+    overflow: hidden; 
+}
+
+.Inputbox2 :disabled{
+    background-color: var(--disabled-input-bg);
+}
+
+
+.Inputbox2 .label{
+      position: absolute;
+      top: -15px;
+      left: 12px;
+      font-size: 26px;
+      font-weight: 500;
+      transform-origin: 0 0;
+      transform: translate3d(0, 0, 0);
+      transition: all .2s ease;
+      pointer-events: none; 
+}
+
+.Inputbox2 input{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 570px;
+    border: 10px;
+    font-family: inherit;
+    padding: 16px 12px 0 12px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+    transition: all .15s ease; 
+    font-size: 23px;
+}
+
+.Inputbox2 input:not(:placeholder-shown) + .label{
+    transform: translate3d(0, -12px, 0) scale(0.75); 
+}
+
+.Inputbox2 input:focus{
+    outline: none;
+    box-shadow: inset 0 -2px 0 yellow; 
+}
+
+.Inputbox2 input:focus + .label{
+    color: primary;
+    transform: translate3d(0, -12px, 0) scale(0.75); 
+}
+
+.ReferenceSource{
+    position: absolute;
+    padding-left: 40px;
+    margin-left: 740px;
+    margin-top: -120px;
+    border: var(--box-border);
+    border-radius: 20px;
+    width: 550px;
+    height: 160px;
+}
+
+.ReferenceBox{
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+.ReferenceBox a{
+    font-size: 30px;
+}
